@@ -102,6 +102,7 @@
   <ItemGroup>
     <ClCompile Include="MathVector_tests.cpp" />
     <ClCompile Include="Matrix_herited_tests.cpp" />
+    <ClCompile Include="Matrix_tests.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
