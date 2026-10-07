@@ -57,7 +57,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>C:\Users\windo\OneDrive\Desktop\Lab_Matrix\Lab_Matrix\MathVector;C:\Users\windo\OneDrive\Desktop\Lab_Matrix\Lab_Matrix;C:\Users\windo\OneDrive\Desktop\Lab_Matrix\Lab_Matrix\TVector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\windo\OneDrive\Desktop\Lab_Matrix\Lab_Matrix\Matrix;C:\Users\windo\OneDrive\Desktop\Lab_Matrix\Lab_Matrix\MathVector;C:\Users\windo\OneDrive\Desktop\Lab_Matrix\Lab_Matrix;C:\Users\windo\OneDrive\Desktop\Lab_Matrix\Lab_Matrix\TVector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MathVector_tests.cpp" />
+    <ClCompile Include="Matrix_herited_tests.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -116,6 +117,9 @@
   <ItemGroup>
     <ProjectReference Include="..\MathVector\MathVector.vcxproj">
       <Project>{91433fe9-4a4c-405a-9c1a-844b823dd4a4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Matrix\Matrix.vcxproj">
+      <Project>{a5f468bb-77fc-4d66-9b5c-8d2347d3455a}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TVector\TVector.vcxproj">
       <Project>{def5c19d-92d9-4039-851b-bfaf2bcc00e7}</Project>
