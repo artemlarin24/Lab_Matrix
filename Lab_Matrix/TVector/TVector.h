@@ -8,16 +8,19 @@ template <class T>
 class TVector {
     T* _data;
     size_t _size;
+    size_t _capacity;
 
 public:
     TVector(size_t size = 0) {
         _size = size;
-        _data = new T[_size]();
+        _capacity = size;
+        _data = new T[_capacity]();
     }
 
     TVector(const TVector& other) {
         _size = other._size;
-        _data = new T[_size]();
+        _capacity = other._capacity;
+        _data = new T[_capacity]();
         for (size_t i = 0; i < _size; i++) {
             _data[i] = other._data[i];
         }
@@ -31,14 +34,23 @@ public:
         if (this == &other) {
             return *this;
         }
-        T* data = new T[other._size]();
+        T* data = new T[other._capacity]();
         for (size_t i = 0; i < other._size; i++) {
             data[i] = other._data[i];
         }
         delete[] _data;
         _data = data;
         _size = other._size;
+        _capacity = other._capacity;
         return *this;
+    }
+
+    size_t size() const {
+        return _size;
+    }
+
+    size_t capacity() const {
+        return _capacity;
     }
 
     T& operator[](size_t pos) {
@@ -53,6 +65,32 @@ public:
             throw std::out_of_range("Wrong index");
         }
         return _data[pos];
+    }
+
+    void reserve(size_t capacity) {
+        if (capacity <= _capacity) {
+            return;
+        }
+        T* data = new T[capacity]();
+        for (size_t i = 0; i < _size; i++) {
+            data[i] = _data[i];
+        }
+        delete[] _data;
+        _data = data;
+        _capacity = capacity;
+    }
+
+    void shrink_to_fit() {
+        if (_size == _capacity) {
+            return;
+        }
+        T* data = new T[_size]();
+        for (size_t i = 0; i < _size; i++) {
+            data[i] = _data[i];
+        }
+        delete[] _data;
+        _data = data;
+        _capacity = _size;
     }
 
     template <class Type>

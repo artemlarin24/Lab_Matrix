@@ -160,3 +160,46 @@ TEST(IteratorTest, DoubleType) {
     EXPECT_DOUBLE_EQ(v[0], 1.5);
     EXPECT_DOUBLE_EQ(v[1], 2.5);
 }
+
+TEST(TVectorTest, ShrinkKeepsElements) {
+    TVector<int> v(3);
+    v[0] = 10;
+    v[1] = 20;
+    v[2] = 30;
+    v.reserve(10);
+    EXPECT_EQ(v.capacity(), 10u);
+    v.shrink_to_fit();
+    EXPECT_EQ(v.size(), 3u);
+    EXPECT_EQ(v.capacity(), 3u);
+    EXPECT_EQ(v[0], 10);
+    EXPECT_EQ(v[1], 20);
+    EXPECT_EQ(v[2], 30);
+    const TVector<int>& cv = v;
+    EXPECT_EQ(*(cv.begin() + 2), 30);
+    EXPECT_TRUE(cv.begin() + 3 == cv.end());
+}
+
+TEST(TVectorTest, ShrinkEmptyVector) {
+    TVector<int> v;
+    v.reserve(5);
+    v.shrink_to_fit();
+    EXPECT_EQ(v.size(), 0u);
+    EXPECT_EQ(v.capacity(), 0u);
+    EXPECT_TRUE(v.begin() == v.end());
+}
+
+TEST(TVectorTest, ShrinkWithoutExtraMemory) {
+    TVector<int> v(2);
+    int* ptr = &v[0];
+    v.shrink_to_fit();
+    EXPECT_EQ(v.capacity(), 2u);
+    EXPECT_EQ(&v[0], ptr);
+}
+
+TEST(TVectorTest, ReserveDoesNotReduceCapacity) {
+    TVector<int> v(2);
+    v.reserve(5);
+    v.reserve(3);
+    EXPECT_EQ(v.size(), 2u);
+    EXPECT_EQ(v.capacity(), 5u);
+}
